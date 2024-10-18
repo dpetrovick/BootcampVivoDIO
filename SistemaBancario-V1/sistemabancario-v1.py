@@ -26,11 +26,18 @@ while True:
     menu = int(input('     Informe sua opção: '))  # escolha das opções do Menu
     if menu == 1:# Opção de depósito - Soma o valor depositado ao saldo.
         print()
-        valor_deposito = float(input('     Informe o valor a ser depositado em sua conta: R$ ')) # Valor depositado
+        valor_deposito = float(input('    Informe o valor a ser depositado em sua conta: R$ ')) # Valor depositado
+        while valor_deposito <= 0:
+            if valor_deposito < 0:
+                print('\033[1:31m    Não é permitido o depósito de valores negativos\033[m')
+                valor_deposito = float(input('    Informe um valor acima de R$ 0,00: R$ '))
+            else:
+                print('\033[1:31m    Nenhum valor depositado\033[m')
+                valor_deposito = float(input('    Informe um valor acima de R$ 0,00: R$ '))
         movimentacao_deposito.append(valor_deposito) # Inseri o valor na lista de depósito
         atualiza_movimentacao['Depósito'] = movimentacao_deposito # Recebe a lista no dic. depósito.
         saldo += valor_deposito
-        print(f'\033[1:33m      Valor R${valor_deposito:.2f} depositado com sucesso!\033[m')
+        print(f'\033[1:33m   Valor R${valor_deposito:.2f} depositado com sucesso!\033[m')
         sleep(2)
 
     elif menu == 2:  # Opção saque - Verifica se é o 3º saque, se tem saldo e o valor do saque ultrapassa o saldo
